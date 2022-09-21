@@ -48,14 +48,19 @@ function addMember(request, response) {
 function updateMember(request, response) {
     const id = request.body.id
     const name = request.body.name
+    const surname = request.body.surname
+    const gender = request.body.gender
+    const telephone = request.body.telephone
 
-    con.query("UPDATE user SET name = ? WHERE id = ?", [name, id], (err, result) => {
+
+    con.query("UPDATE user SET name = ?, surname = ?, gender = ?, telephone = ?  WHERE id = ?", [name, surname,gender,telephone, id], (err, result) => {
         if (err) {
             console.log(err)
         } else {
-            response.send(result)
+            response.send("Success")
         }
     })
+}
 
     function deleteMember(request, response) {
         const telephone = request.params.telephone
@@ -64,7 +69,7 @@ function updateMember(request, response) {
             if (err){
                 console.log(err)
          } else {
-                response.send(result)
+                response.send("Deleted!!!")
          }
         })
     }
