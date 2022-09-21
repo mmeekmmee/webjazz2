@@ -15,7 +15,7 @@ server.get("/check-status", checkStatus)
 server.get("/list-member", listMember)
 server.post("/add-member", addMember)
 server.put("/update-member", updateMember)
-server.delete("/delete-member", deleteMember)
+server.delete("/delete-member/:telephone", deleteMember)
 
 function checkStatus(request, response) {
         response.send("Server is OK")
@@ -63,7 +63,7 @@ function updateMember(request, response) {
 }
 
     function deleteMember(request, response) {
-        const telephone = request.params.telephone
+        const telephone = request.body.telephone
     
         con.query("DELETE FROM user where telephone = ?", [telephone], (err, result) => {
             if (err){
